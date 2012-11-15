@@ -17,12 +17,12 @@ Backbone.sync = function(method, model, options, error) {
 
     this.fetched = false;
 
-    var deferred = ajaxSync(method, model, options, error);
+    var deferred = ajaxSync.call(this, method, model, options, error);
 
     deferred.then(function() {
-        me.trigger('after:sync');
-
         me.fetched = true;
+
+        me.trigger('after:sync');
 
         if (me.hasOwnProperty('afterSync')) {
             me.afterSync();
